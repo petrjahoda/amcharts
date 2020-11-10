@@ -1,0 +1,15 @@
+#downtimes {
+    width: 30%;
+    height: 33vh;
+}
+
+#downtimeUsers {
+    width: 30%;
+    height: 33vh;
+}
+#usersDowntimes {
+    width: 30%;
+    height: 33vh;
+}
+
+#wrapper { display: flex; }
