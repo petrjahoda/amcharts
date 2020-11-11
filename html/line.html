@@ -14,15 +14,17 @@
 
 <!-- Chart code -->
 <script>
+    console.time("time")
     am4core.ready(function() {
 
 // Themes begin
-        am4core.useTheme(am4themes_animated);
+//         am4core.useTheme(am4themes_animated);
 // Themes end
-
+        am4core.options.queue = true;
         var chart = am4core.create("chartdiv", am4charts.XYChart);
-        chart.paddingRight = 20;
 
+        chart.paddingRight = 20;
+        chart.svgContainer.autoResize = false;
         var data = [];
         var visits = 10;
         for (var i = 1; i < 50000; i++) {
@@ -55,9 +57,8 @@
         chart.cursor = new am4charts.XYCursor();
         chart.cursor.xAxis = dateAxis;
 
-        var scrollbarX = new am4core.Scrollbar();
-        scrollbarX.marginBottom = 20;
-        chart.scrollbarX = scrollbarX;
+        chart.scrollbarX = new am4core.Scrollbar();
+        chart.scrollbarX.parent = chart.bottomAxesContainer;
 
     }); // end am4core.ready()
 </script>

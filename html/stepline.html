@@ -1,0 +1,92 @@
+<!-- Styles -->
+<style>
+    #chartdiv {
+        width: 100%;
+        height: 500px;
+    }
+
+</style>
+
+<!-- Resources -->
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+<!-- Chart code -->
+<script>
+    am4core.ready(function() {
+
+// Themes begin
+//         am4core.useTheme(am4themes_animated);
+// Themes end
+
+// Create chart
+        var chart = am4core.create("chartdiv", am4charts.XYChart);
+        chart.paddingRight = 20;
+
+        var data =  [{
+            "year": "1950",
+            "value1": 0,
+            "value2": 1
+        }, {
+            "year": "1951",
+            "value1": 1,
+            "value2": 0
+        }, {
+            "year": "1952",
+            "value1": 0,
+            "value2": 1
+        }, {
+            "year": "1953",
+            "value1": 1,
+            "value2": 0
+        }, {
+            "year": "1957",
+            "value1": 0,
+            "value2": 1
+        }, {
+            "year": "1958",
+            "value1": 1,
+            "value2": 0
+        }];
+
+        chart.data = data;
+        chart.dateFormatter.inputDateFormat = "yyyy";
+
+        var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+        // dateAxis.renderer.minGridDistance = 50;
+        dateAxis.baseInterval = {timeUnit:"year", count:1};
+
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis.tooltip.disabled = true;
+
+        var series = chart.series.push(new am4charts.StepLineSeries());
+        series.dataFields.dateX = "year";
+        series.dataFields.valueY = "value1";
+        series.tooltipText = "{valueY.value1}";
+        series.strokeWidth = 0;
+        series.fillOpacity = 1
+        series.fill = "red"
+        var series2 = chart.series.push(new am4charts.StepLineSeries());
+        series2.dataFields.dateX = "year";
+        series2.dataFields.valueY = "value2";
+        series2.tooltipText = "{valueY.value2}";
+        series2.strokeWidth = 0;
+        series2.fillOpacity = 1;
+        series2.fill = "green"
+
+        chart.cursor = new am4charts.XYCursor();
+        chart.cursor.xAxis = dateAxis;
+        chart.cursor.fullWidthLineX = true;
+        chart.cursor.lineX.strokeWidth = 0;
+        chart.cursor.lineX.fill = chart.colors.getIndex(2);
+        chart.cursor.lineX.fillOpacity = 0.1;
+
+        chart.scrollbarX = new am4core.Scrollbar();
+        chart.scrollbarX.parent = chart.bottomAxesContainer;
+
+    }); // end am4core.ready()
+</script>
+
+<!-- HTML -->
+<div id="chartdiv"></div>

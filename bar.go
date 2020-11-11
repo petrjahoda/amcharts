@@ -53,20 +53,18 @@ func getDowntimes(writer http.ResponseWriter, request *http.Request, params http
 
 	startTime := time.Unix(data.Start/1000, 0)
 	endTime := time.Unix(data.End/1000, 0)
-	logInfo("Bar", "User asked data from "+startTime.String()+" to "+endTime.String() + " for " + data.Data)
+	logInfo("Bar", "User asked data from "+startTime.String()+" to "+endTime.String()+" for "+data.Data)
 	var downtimes []Downtime
-	var firstData Downtime
-	firstData.Name = "Smoking"
-	firstData.Value = (1*time.Hour + 27*time.Minute) / 1000000000
-	downtimes = append(downtimes, firstData)
-	var secondData Downtime
-	secondData.Name = "Resting"
-	secondData.Value = 330 * time.Minute / 1000000000
-	downtimes = append(downtimes, secondData)
-	var thirdData Downtime
-	thirdData.Name = "Sleeping"
-	thirdData.Value = 67 * time.Minute / 1000000000
-	downtimes = append(downtimes, thirdData)
+	downtimes = append(downtimes, Downtime{"Smoking", (1*time.Hour + 27*time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{"Resting", (27 * time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{"Sleeping", (57 * time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{" ", (0 * time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{"  ", (0 * time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{"   ", (0 * time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{"    ", (0 * time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{"     ", (0 * time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{"      ", (0 * time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{"       ", (0 * time.Minute) / 1000000000})
 	logInfo("Bar", "Sending data")
 	var responseData DowntimesOutput
 	responseData.Result = "ok"
@@ -89,18 +87,16 @@ func getDowntimeUsers(writer http.ResponseWriter, request *http.Request, params 
 	}
 	logInfo("Bar", "User asked for "+data.DowntimeName)
 	var downtimeUsers []DowntimeUser
-	var firstData DowntimeUser
-	firstData.Name = "Petr Jahoda"
-	firstData.Value = (2*time.Hour + 27*time.Minute) / 1000000000
-	downtimeUsers = append(downtimeUsers, firstData)
-	var secondData DowntimeUser
-	secondData.Name = "Karel Gott"
-	secondData.Value = 98 * time.Minute / 1000000000
-	downtimeUsers = append(downtimeUsers, secondData)
-	var thirdData DowntimeUser
-	thirdData.Name = "James Bond"
-	thirdData.Value = 33 * time.Minute / 1000000000
-	downtimeUsers = append(downtimeUsers, thirdData)
+	downtimeUsers = append(downtimeUsers, DowntimeUser{"Petr Jahoda", 27 * time.Minute / 1000000000})
+	downtimeUsers = append(downtimeUsers, DowntimeUser{"Karel Gott", 17 * time.Minute / 1000000000})
+	downtimeUsers = append(downtimeUsers, DowntimeUser{"James Bond", 45 * time.Minute / 1000000000})
+	downtimeUsers = append(downtimeUsers, DowntimeUser{"Josef Nedopil", 12 * time.Minute / 1000000000})
+	downtimeUsers = append(downtimeUsers, DowntimeUser{" ", (0 * time.Minute) / 1000000000})
+	downtimeUsers = append(downtimeUsers, DowntimeUser{"  ", (0 * time.Minute) / 1000000000})
+	downtimeUsers = append(downtimeUsers, DowntimeUser{"   ", (0 * time.Minute) / 1000000000})
+	downtimeUsers = append(downtimeUsers, DowntimeUser{"    ", (0 * time.Minute) / 1000000000})
+	downtimeUsers = append(downtimeUsers, DowntimeUser{"     ", (0 * time.Minute) / 1000000000})
+	downtimeUsers = append(downtimeUsers, DowntimeUser{"      ", (0 * time.Minute) / 1000000000})
 	logInfo("Bar", "Sending data")
 	var responseData DowntimeUsersOutput
 	responseData.Result = "ok"
@@ -109,7 +105,6 @@ func getDowntimeUsers(writer http.ResponseWriter, request *http.Request, params 
 	_ = json.NewEncoder(writer).Encode(responseData)
 	return
 }
-
 
 func getUsersDowntimes(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	var data DowntimesInput
@@ -125,20 +120,18 @@ func getUsersDowntimes(writer http.ResponseWriter, request *http.Request, params
 
 	startTime := time.Unix(data.Start/1000, 0)
 	endTime := time.Unix(data.End/1000, 0)
-	logInfo("Bar", "User asked data from "+startTime.String()+" to "+endTime.String() + " for " + data.Data)
+	logInfo("Bar", "User asked data from "+startTime.String()+" to "+endTime.String()+" for "+data.Data)
 	var downtimes []Downtime
-	var firstData Downtime
-	firstData.Name = "Hiking"
-	firstData.Value = (3*time.Hour + 27*time.Minute) / 1000000000
-	downtimes = append(downtimes, firstData)
-	var secondData Downtime
-	secondData.Name = "Killing"
-	secondData.Value = 42 * time.Minute / 1000000000
-	downtimes = append(downtimes, secondData)
-	var thirdData Downtime
-	thirdData.Name = "Hoping"
-	thirdData.Value = 42 * time.Minute / 1000000000
-	downtimes = append(downtimes, thirdData)
+	downtimes = append(downtimes, Downtime{"Hiking", (3*time.Hour + 27*time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{"Hoping", (2*time.Hour + 27*time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{"  ", (0 * time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{"   ", (0 * time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{"    ", (0 * time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{"     ", (0 * time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{"      ", (0 * time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{"       ", (0 * time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{"        ", (0 * time.Minute) / 1000000000})
+	downtimes = append(downtimes, Downtime{"         ", (0 * time.Minute) / 1000000000})
 	logInfo("Bar", "Sending data")
 	var responseData DowntimesOutput
 	responseData.Result = "ok"

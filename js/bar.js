@@ -16,13 +16,13 @@ fetch("/get_downtime_raw_data", {
         am4core.ready(function () {
             const chart = am4core.create("downtimes", am4charts.XYChart);
             chart.padding(40, 40, 40, 40);
-
+            chart.fontSize = 10
             const categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
             categoryAxis.renderer.grid.template.location = 0;
             categoryAxis.dataFields.category = "Name";
             categoryAxis.renderer.inversed = true;
             categoryAxis.renderer.grid.template.disabled = true;
-
+            categoryAxis.renderer.minGridDistance = 1;
             const valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
             valueAxis.min = 0;
             valueAxis.renderer.baseGrid.disabled = true;
@@ -33,6 +33,7 @@ fetch("/get_downtime_raw_data", {
             series.dataFields.categoryY = "Name";
             series.dataFields.valueX = "Value";
             series.columns.template.strokeOpacity = 0;
+            series.columns.template.maxHeight = 30;
 
             const labelBullet = series.bullets.push(new am4charts.LabelBullet());
             labelBullet.label.horizontalCenter = "right";
@@ -41,9 +42,7 @@ fetch("/get_downtime_raw_data", {
             labelBullet.locationX = 0;
 
             series.fill = am4core.color("steelblue");
-
             categoryAxis.sortBySeries = series;
-
             const columnTemplate = series.columns.template;
             columnTemplate.togglable = true;
             const activeState = columnTemplate.states.create("active");
@@ -51,6 +50,7 @@ fetch("/get_downtime_raw_data", {
 
 
             let chartData = JSON.parse(data)
+            console.log(chartData)
             chart.data = chartData.Downtimes;
             columnTemplate.events.on("hit", function (event) {
                 clicked.textContent = event.target.dataItem.dataContext.Name
@@ -96,13 +96,13 @@ function DownloadUsersDowntime(userName) {
             am4core.ready(function () {
                 const chart = am4core.create("usersDowntimes", am4charts.XYChart);
                 chart.padding(40, 40, 40, 40);
-
+                chart.fontSize = 10
                 const categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
                 categoryAxis.renderer.grid.template.location = 0;
                 categoryAxis.dataFields.category = "Name";
                 categoryAxis.renderer.inversed = true;
                 categoryAxis.renderer.grid.template.disabled = true;
-
+                categoryAxis.renderer.minGridDistance = 1;
                 const valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
                 valueAxis.min = 0;
                 valueAxis.renderer.baseGrid.disabled = true;
@@ -113,6 +113,7 @@ function DownloadUsersDowntime(userName) {
                 series.dataFields.categoryY = "Name";
                 series.dataFields.valueX = "Value";
                 series.columns.template.strokeOpacity = 0;
+                series.columns.template.maxHeight = 30;
 
                 const labelBullet = series.bullets.push(new am4charts.LabelBullet());
                 labelBullet.label.horizontalCenter = "right";
@@ -149,12 +150,13 @@ function DownloadDowntimeUsers(DowntimeName) {
             am4core.ready(function () {
                 const chart = am4core.create("downtimeUsers", am4charts.XYChart);
                 chart.padding(40, 40, 40, 40);
-
+                chart.fontSize = 10
                 const categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
                 categoryAxis.renderer.grid.template.location = 0;
                 categoryAxis.dataFields.category = "Name";
                 categoryAxis.renderer.inversed = true;
                 categoryAxis.renderer.grid.template.disabled = true;
+                categoryAxis.renderer.minGridDistance = 1;
 
                 const valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
                 valueAxis.min = 0;
@@ -166,6 +168,7 @@ function DownloadDowntimeUsers(DowntimeName) {
                 series.dataFields.categoryY = "Name";
                 series.dataFields.valueX = "Value";
                 series.columns.template.strokeOpacity = 0;
+                series.columns.template.maxHeight = 30;
 
                 const labelBullet = series.bullets.push(new am4charts.LabelBullet());
                 labelBullet.label.horizontalCenter = "right";
